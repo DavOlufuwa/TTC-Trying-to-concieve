@@ -1,12 +1,13 @@
-import { getAllPosts, getPostBySlug } from '@/sanity/sanityUtils'
-import React from 'react'
+import { getAllPosts, getPostBySlug } from "@/sanity/sanityUtils";
+
+import React from "react";
 
 const page = async () => {
-  const posts = await getAllPosts()
-  const singlePost = await getPostBySlug("the-joy-of-living");
-  return (
-    <div>Parley</div>
-  )
-}
+  const word = await fetch("http://localhost:5050/api/home", {
+    cache: "no-store",
+  }).then((res) => res.json());
 
-export default page
+  return <div>{word.message}</div>;
+};
+
+export default page;
