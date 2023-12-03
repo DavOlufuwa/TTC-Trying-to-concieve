@@ -41,17 +41,17 @@ const userSchema = new Schema({
   },
   partnerFullName: {
     type: String,
-    minlength: 2
+    minlength: 2,
   },
   partnerAge: {
     type: String,
-    minlength: 2
+    minlength: 2,
   },
   partnerGender: {
-    type: String
+    type: String,
   },
   partnerDateOfBirth: {
-    type: Date
+    type: Date,
   },
   partnerEmail: {
     type: String,
@@ -67,10 +67,28 @@ const userSchema = new Schema({
   },
   role: {
     type: Number,
-    default: roleList.User
+    default: roleList.User,
   },
-  verified : {
-    type : Boolean,
-    default : false
+  verified: {
+    type: Boolean,
+    default: false,
+  },
+  refreshToken: {
+    type: String,
+  },
+});
+
+userSchema.set("toJSON", {
+  transform: (document, returnedObject) => {
+    returnedObject.id = returnedObject._id.toString();
+    delete returnedObject._id;
+    delete returnedObject.__v;
+    delete returnedObject.password;
   },
 })
+
+
+
+const User = model("User" , userSchema);
+
+module.exports = User
