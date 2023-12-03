@@ -3,7 +3,7 @@ import cors from "cors";
 const app = express();
 const PORT = 5050;
 
-app.get("/api/home", (_req, res) => {
+app.get("/api/home", (req, res) => {
   res.json({ message: "Hello World!, We made it bruhhh How are things Going, Fine I guess" });
 });
 
