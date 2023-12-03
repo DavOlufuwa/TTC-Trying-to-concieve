@@ -9,6 +9,15 @@ userRouter.get("/", async (request, response) => {
   response.json(users);
 })
 
+// Sign up User 
+userRouter.post("/", async (request, response) => {
+  const user = new User(request.body);
+
+  const savedUser = await user.save();
+  
+  response.status(201).json(savedUser);
+})
+
 
 
 module.exports = userRouter

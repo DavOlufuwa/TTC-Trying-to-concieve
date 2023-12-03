@@ -32,9 +32,8 @@ adminSchema.set("toJSON", {
     delete returnedObject.__v;
     delete returnedObject.password;
   },
-})
+});
 
+const Admin = model("Admin", adminSchema);
 
-const Admin = model("Admin" , adminSchema);
-
-module.exports = Admin
+module.exports = Admin;
