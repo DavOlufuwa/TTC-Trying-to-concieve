@@ -10,6 +10,7 @@ const {
 } = require("./utils/middleware");
 const { MONGODB_URI } = require("./utils/config");
 const logger = require("./utils/logger");
+const superAdminRouter = require("./controllers/superAdmin");
 
 
 const app = express();
@@ -27,6 +28,7 @@ mongoose
 app.use(express.json());
 app.use(cors());
 app.use(requestLogger);
+app.use("/api/superadmin", superAdminRouter)
 app.use(unknownEndpoint);
 app.use(errorHandler);
 

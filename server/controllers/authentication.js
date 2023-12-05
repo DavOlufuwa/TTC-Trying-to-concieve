@@ -11,7 +11,7 @@ loginRouter.post("/users", async (request, response) => {
 
   const user = await User.findOne({ email });
 
-  const correctPassword = await bcryptjs.compare(password, user.passwordHash);
+  const correctPassword = user === null ? false : await bcryptjs.compare(password, user.password);
 
   if (!user) {
     return response.status(401).json({ error: "invalid email" });
@@ -64,7 +64,7 @@ loginRouter.post("/admins", async (request, response) => {
 
   const admin = await Admin.findOne({ email });
 
-  const correctPassword = await bcryptjs.compare(password, admin.passwordHash);
+  const correctPassword = admin === null ? false : await bcryptjs.compare(password, admin.password);
 
   if (!admin) {
     return response.status(401).json({ error: "invalid email" });
@@ -114,9 +114,9 @@ loginRouter.post("/admins", async (request, response) => {
 loginRouter.post("/doctors", async (request, response) => {
   const { userName, password } = request.body;
 
-  const doctor = await Admin.findOne({ userName });
+  const doctor = await Doctor.findOne({ userName });
 
-  const correctPassword = await bcryptjs.compare(password, doctor.passwordHash);
+  const correctPassword = doctor === null ? false : await bcryptjs.compare(password, doctor.password);
 
   if (!doctor) {
     return response.status(401).json({ error: "invalid email" });
@@ -172,7 +172,7 @@ loginRouter.post("/superadmin", async (request, response) => {
 
   const correctPassword = await bcryptjs.compare(
     password,
-    superAdmin.passwordHash
+    superAdmin.password
   );
 
   if (!superAdmin) {
