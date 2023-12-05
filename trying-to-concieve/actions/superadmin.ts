@@ -9,12 +9,8 @@ interface Formdata {
 
 export const signUpSuperAdmin = async (formData: Formdata) => {
   try {
-
     const response = await axios.post("http://localhost:5050/api/superadmin", formData);
-    if (response.status === 201) {
-      console.log(response.data);
-
-    }
+    console.log(response.data);
   } catch (error) {
     console.log(error)
   }

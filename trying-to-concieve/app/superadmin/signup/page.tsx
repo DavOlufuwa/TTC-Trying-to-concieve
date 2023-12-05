@@ -3,7 +3,6 @@ import { signUpSuperAdmin } from "@/actions/superadmin";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-
 const page = () => {
   const [formData, setFormData] = useState({
     fullName: "",
@@ -11,7 +10,7 @@ const page = () => {
     password: "",
   });
   const [error, setError] = useState("");
-  
+
   const router = useRouter();
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -23,8 +22,7 @@ const page = () => {
   const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.value !== formData.password) {
       setError("Passwords do not match");
-    }
-    else {
+    } else {
       setError("");
     }
   };
@@ -32,12 +30,12 @@ const page = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      await signUpSuperAdmin(formData)
+      await signUpSuperAdmin(formData);
       router.replace("/");
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   return (
     <div>
@@ -83,7 +81,9 @@ const page = () => {
           <div className="h-4">
             {error !== "" && <p className="text-red-500">{error}</p>}
           </div>
-          <button type="submit" className="bg-red-500">Sign Up</button>
+          <button type="submit" className="bg-red-500">
+            Sign Up
+          </button>
         </form>
       </div>
     </div>

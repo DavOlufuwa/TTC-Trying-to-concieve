@@ -7,10 +7,10 @@ const Navigation = () => {
         <Link href="/">Home</Link>
       </li>
       <li>
-        <Link href="/signup/superadmin">Create Super Admin</Link>
+        <Link href="/superadmin">Create Super Admin</Link>
       </li>
       <li>
-        <Link href="">Blog Post</Link>
+        <Link href="/blog-admin" target="_blank">Blog Post</Link>
       </li>
     </ul>
   );
