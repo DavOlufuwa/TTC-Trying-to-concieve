@@ -1,15 +1,17 @@
 "use client";
 import useMultiStep from "@/app/hooks/useMultiStep";
 import { UserForm } from "@/types/users";
-import Link from "next/link";
-import React, { FormEvent, ReactNode, useState } from "react";
+import React, { FormEvent, useState } from "react";
 import StepOne from "../components/StepOne";
 import StepTwo from "../components/StepTwo";
 import StepThree from "../components/StepThree";
 import StepFour from "../components/StepFour";
 import StepFive from "../components/StepFive";
+import { signUpNewUser } from "@/actions/users";
+import { useRouter } from "next/navigation";
 
 const page = () => {
+  const router = useRouter();
   const [initialData, setInitialData] = useState<UserForm>({
     fullName: "",
     age: "",
@@ -72,35 +74,34 @@ const page = () => {
     />,
   ]);
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     if (currentStepIndex + 1 === 2 && hasPartner === "yes") {
       return nextStep();
-    }
-    else if (currentStepIndex + 1 === 2 && hasPartner === "no") {
+    } else if (currentStepIndex + 1 === 2 && hasPartner === "no") {
       return goToStep(3);
-    }
-    else if(!isLastStep){
+    } else if (!isLastStep) {
       return nextStep();
-    }
-    else if (isLastStep && acceptTerms) {
-      alert("Yay You made It")
+    } else if (isLastStep && acceptTerms) {
+      try {
+        await signUpNewUser(initialData);
+        router.replace("/");
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
   const handleReturn = () => {
     if (currentStepIndex + 1 === 3 && hasPartner === "yes") {
       return prevStep();
-    }
-    else if (currentStepIndex + 1 === 4 && hasPartner === "no") {
+    } else if (currentStepIndex + 1 === 4 && hasPartner === "no") {
       return goToStep(currentStepIndex - 2);
-      
-    }else {
-      return prevStep()
+    } else {
+      return prevStep();
     }
-  }
-
+  };
 
   return (
     <div>
