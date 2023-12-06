@@ -10,7 +10,7 @@ const userSchema = new Schema({
     required: true,
   },
   age: {
-    type: String,
+    type: Number,
     minlength: 2,
     required: true,
   },
@@ -19,7 +19,11 @@ const userSchema = new Schema({
     required: true,
   },
   dateOfBirth: {
-    type: Date,
+    type: String,
+    required: true,
+  },
+  country: {
+    type: String,
     required: true,
   },
   email: {
@@ -32,7 +36,7 @@ const userSchema = new Schema({
     required: true,
   },
   phoneNumber: {
-    type: String,
+    type: Number,
     required: true,
   },
   password: {
@@ -50,13 +54,7 @@ const userSchema = new Schema({
   partnerGender: {
     type: String,
   },
-  partnerDateOfBirth: {
-    type: Date,
-  },
   partnerEmail: {
-    type: String,
-  },
-  partnerAddress: {
     type: String,
   },
   partnerPhoneNumber: {
