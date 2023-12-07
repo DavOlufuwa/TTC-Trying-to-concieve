@@ -2,17 +2,10 @@ const User = require("../models/user");
 const userRouter = require("express").Router();
 const bcryptjs = require("bcryptjs");
 const {
-  superAdminExtractor,
   doctorExtractor,
   adminExtractor,
   userExtractor,
 } = require("../utils/middleware");
-
-// Get all Users
-userRouter.get("/", async (request, response) => {
-  const users = await User.find({});
-  response.json(users);
-});
 
 // Sign up User
 userRouter.post("/", async (request, response) => {
@@ -55,20 +48,17 @@ userRouter.post("/", async (request, response) => {
 });
 
 // Get All Users
-userRouter.get(
-  "/",
-  superAdminExtractor,
-  adminExtractor,
+userRouter.get("/", adminExtractor,
   async (request, response) => {
     const authorizedUser = request.user;
-
-    if (authorizedUser?.role !== 2170 || authorizedUser?.role !== 5150) {
+  
+    if (!authorizedUser && ((authorizedUser.role !== 2170) || (authorizedUser.role !== 5150))) {
       return response.status(401).json({ error: "unauthorized action" });
     }
 
     const users = await User.find({});
 
-    response.json(users);
+    response.status(200).json(users);
   }
 );
 
@@ -83,11 +73,28 @@ userRouter.get("/:id", userExtractor, async (request, response) => {
   response.status(200).json(authorizedUser);
 });
 
-// Delete User
+// Verify User
+userRouter.put(
+  "/:id",
+  adminExtractor,
+  async (request, response) => {
+    const userId = request.params.id;
 
+    if (authorizedUser?.role !== 2170 || authorizedUser?.role !== 5150) {
+      return response.status(401).json({ error: "unauthorized action" });
+    }
+
+    const verifiedUser = await User.findByIdAndUpdate(userId, {
+      verified: true,
+    });
+
+    response.status(200).json(verifiedUser);
+  }
+);
+
+// Delete User
 userRouter.delete(
   "/:id",
-  superAdminExtractor,
   adminExtractor,
   async (request, response) => {
     const id = request.params.id;

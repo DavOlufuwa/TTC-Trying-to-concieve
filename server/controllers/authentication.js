@@ -59,7 +59,7 @@ loginRouter.post("/users", async (request, response) => {
     });
 });
 
-loginRouter.post("/admins", async (request, response) => {
+loginRouter.post("/admin", async (request, response) => {
   const { email, password } = request.body;
 
   const admin = await Admin.findOne({ email });
@@ -184,8 +184,8 @@ loginRouter.post("/superadmin", async (request, response) => {
   }
 
   const superAdminDetailsForToken = {
-    email: superAdmin.email,
     id: superAdmin.id,
+    email: superAdmin.email,
     fullName: superAdmin.fullName,
     role: superAdmin.role,
   };

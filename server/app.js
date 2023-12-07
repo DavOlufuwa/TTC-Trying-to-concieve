@@ -7,12 +7,14 @@ const {
   requestLogger,
   unknownEndpoint,
   errorHandler,
+  accessTokenExtractor,
 } = require("./utils/middleware");
 const { MONGODB_URI } = require("./utils/config");
 const logger = require("./utils/logger");
 const superAdminRouter = require("./controllers/superAdmin");
 const userRouter = require("./controllers/users");
-
+const loginRouter = require("./controllers/authentication");
+const adminRouter = require("./controllers/admin");
 
 const app = express();
 
@@ -29,8 +31,11 @@ mongoose
 app.use(express.json());
 app.use(cors());
 app.use(requestLogger);
-app.use("/api/superadmin", superAdminRouter)
-app.use("/api/users", userRouter)
+app.use(accessTokenExtractor);
+app.use("/api/superadmin", superAdminRouter);
+app.use("/api/admin", adminRouter);
+app.use("/api/users", userRouter);
+app.use("/api/auth", loginRouter);
 app.use(unknownEndpoint);
 app.use(errorHandler);
 
