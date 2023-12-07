@@ -46,7 +46,7 @@ loginRouter.post("/users", async (request, response) => {
     .status(200)
     .cookie("jwt", refreshToken, {
       httpOnly: true,
-      secure: true,
+      secure: false,
       sameSite: "None",
       maxAge: 24 * 60 * 60 * 1000,
     })
@@ -99,7 +99,7 @@ loginRouter.post("/admins", async (request, response) => {
     .status(200)
     .cookie("jwt", refreshToken, {
       httpOnly: true,
-      secure: true,
+      secure: false,
       sameSite: "None",
       maxAge: 24 * 60 * 60 * 1000,
     })
@@ -152,7 +152,7 @@ loginRouter.post("/doctors", async (request, response) => {
     .status(200)
     .cookie("jwt", refreshToken, {
       httpOnly: true,
-      secure: true,
+      secure: false,
       sameSite: "None",
       maxAge: 24 * 60 * 60 * 1000,
     })
@@ -208,7 +208,7 @@ loginRouter.post("/superadmin", async (request, response) => {
     .status(200)
     .cookie("jwt", refreshToken, {
       httpOnly: true,
-      secure: true,
+      secure: false,
       sameSite: "None",
       maxAge: 24 * 60 * 60 * 1000,
     })

@@ -1,5 +1,8 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
+const SuperAdmin = require("../models/superAdmin");
+const Doctor = require("../models/doctor");
+const Admin = require("../models/admin");
 const logger = require("./logger");
 
 const requestLogger = (request, response, next) => {
@@ -43,6 +46,54 @@ const accessTokenExtractor = async (request, response, next) => {
 };
 
 const userExtractor = async (request, response, next) => {
+  const verifiedAccessToken = jwt.verify(
+    request.token,
+    process.env.SECRET_TOKEN_KEY
+  );
+
+  if (!verifiedAccessToken.id) {
+    return response
+      .status(401)
+      .json({ error: "accessToken missing or invalid" });
+  } else {
+    request.user = await User.findById(verifiedAccessToken.id);
+  }
+  next();
+};
+
+const adminExtractor = async (request, response, next) => {
+  const verifiedAccessToken = jwt.verify(
+    request.token,
+    process.env.SECRET_TOKEN_KEY
+  );
+
+  if (!verifiedAccessToken.id) {
+    return response
+      .status(401)
+      .json({ error: "accessToken missing or invalid" });
+  } else {
+    request.user = await Admin.findById(verifiedAccessToken.id);
+  }
+  next();
+};
+
+const superAdminExtractor = async (request, response, next) => {
+  const verifiedAccessToken = jwt.verify(
+    request.token,
+    process.env.SECRET_TOKEN_KEY
+  );
+
+  if (!verifiedAccessToken.id) {
+    return response
+      .status(401)
+      .json({ error: "accessToken missing or invalid" });
+  } else {
+    request.user = await SuperAdmin.findById(verifiedAccessToken.id);
+  }
+  next();
+};
+
+const doctorExtractor = async (request, response, next) => {
   const verifiedAccessToken = jwt.verify(
     request.token,
     process.env.SECRET_TOKEN_KEY
@@ -171,6 +222,9 @@ module.exports = {
   errorHandler,
   accessTokenExtractor,
   userExtractor,
+  adminExtractor,
+  superAdminExtractor,
+  doctorExtractor,
   refreshTokenExtractor,
   searchByTitle,
   searchByAuthor,
