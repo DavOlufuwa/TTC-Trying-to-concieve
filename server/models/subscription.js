@@ -19,7 +19,7 @@ const subscriptionSchema = new Schema({
   },
   subscriptionStatus: {
     type: String,
-    enum: ["active", "cancelled", "renewed", "not-renewed", "failed"],
+    enum: ["active", "cancelled", "renewed", "not-renewed", "completed"],
   },
   customerCode: {
     type: String,

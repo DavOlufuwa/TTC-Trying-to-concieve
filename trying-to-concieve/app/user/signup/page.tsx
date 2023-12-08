@@ -15,7 +15,7 @@ const page = () => {
   const [initialData, setInitialData] = useState<UserForm>({
     fullName: "",
     age: "",
-    gender: "female",
+    gender: "",
     dateOfBirth: "",
     country: "Nigeria",
     email: "",
@@ -23,7 +23,7 @@ const page = () => {
     phoneNumber: "",
     partnerFullName: "",
     partnerAge: "",
-    partnerGender: "Male",
+    partnerGender: "",
     partnerEmail: "",
     partnerPhoneNumber: "",
     medicalHistory: "",

@@ -40,6 +40,7 @@ const StepThree = ({
       <div>
         <label htmlFor="partnerGender">Partner Gender</label>
         <select name="partnerGender" id="partnerGender" defaultValue={partnerGender} onChange={(e) => updateFields({ partnerGender: e.target.value })}>
+          <option value="">Select Gender</option>
           <option value="male">Male</option>
           <option value="female">Female</option>
           <option value="non-binary">Non-Binary</option>

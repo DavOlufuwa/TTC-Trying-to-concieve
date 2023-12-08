@@ -15,7 +15,11 @@ subscriptionRouter.post('/', async (request, response) => {
 
 subscriptionRouter.get('/', async (request, response) => {
   
-  const subscriptions = await Subscription.find({})
+  const subscriptions = await Subscription.find({}).populate('subscriberId', {
+    fullName: 1,
+    email: 1,
+    phoneNumber: 1
+  })
 
   response.status(200).json(subscriptions);
 })

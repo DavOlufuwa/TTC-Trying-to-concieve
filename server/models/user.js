@@ -74,6 +74,7 @@ const userSchema = new Schema({
   refreshToken: {
     type: String,
   },
+  
 });
 
 userSchema.set("toJSON", {

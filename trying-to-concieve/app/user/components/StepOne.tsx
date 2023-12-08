@@ -34,10 +34,10 @@ const StepOne = ({
           type="number"
           id="age"
           name="age"
-          required
           value={age}
           onChange={(e) => updateFields({ age: e.target.value })}
-        />
+          required
+          />
       </div>
       <div>
         <label htmlFor="dateOfBirth">Date of Birth</label>
@@ -56,9 +56,11 @@ const StepOne = ({
           name="gender"
           id="gender"
           defaultValue={gender}
-          required
           onChange={(e) => updateFields({ gender: e.target.value })}
+          required
         >
+          <option value="">Select Gender</option>
+          <option value="male">Male</option>
           <option value="female">Female</option>
           <option value="non-binary">Non-Binary</option>
           <option value="prefer not to say">Prefer not to say</option>
@@ -70,9 +72,9 @@ const StepOne = ({
           type="email"
           id="email"
           name="email"
-          required
           value={email}
           onChange={(e) => updateFields({ email: e.target.value })}
+          required
         />
       </div>
     </div>
