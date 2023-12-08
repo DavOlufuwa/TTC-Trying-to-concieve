@@ -24,7 +24,7 @@ webhookRouter.post("/", async (request, response) => {
           planName: event.data.plan.name,
           planCode: event.data.plan.plan_code,
           subscriptionCode: event.data.subscription_code,
-          subscriptionAmount: event.data.amount,
+          subscriptionAmount: event.data.amount / 100,
           subscriptionStatus: "active",
           customerCode: event.data.customer.customer_code,
           customerEmail: event.data.customer.email,
@@ -34,7 +34,7 @@ webhookRouter.post("/", async (request, response) => {
 
         await subscription.save();
 
-        
+
     }
   }
   response.status(200).send("OK");
