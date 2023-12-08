@@ -56,14 +56,14 @@ userRouter.get("/", adminExtractor,
       return response.status(401).json({ error: "unauthorized action" });
     }
 
-    const users = await User.find({});
+    const users = await User.find({}).sort({id: -1}).exec();
 
     response.status(200).json(users);
   }
 );
 
 // Get User By Id
-userRouter.get("/:id", userExtractor, async (request, response) => {
+userRouter.get("/:id", async (request, response) => {
   const authorizedUser = request.user;
 
   if (!authorizedUser) {

@@ -15,7 +15,7 @@ subscriptionRouter.post('/', async (request, response) => {
 
 subscriptionRouter.get('/', async (request, response) => {
   
-  const subscriptions = await Subscription.find({}).populate('subscriberId', {
+  const subscriptions = await Subscription.find({}).sort({ createdAt: -1 }).populate('subscriberId', {
     fullName: 1,
     email: 1,
     phoneNumber: 1
