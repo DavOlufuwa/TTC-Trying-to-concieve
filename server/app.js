@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 require("express-async-errors");
-require("events").EventEmitter.defaultMaxListeners = 15;
+require("events").EventEmitter.defaultMaxListeners = 20;
 const mongoose = require("mongoose");
 const {
   requestLogger,
@@ -16,6 +16,7 @@ const userRouter = require("./controllers/users");
 const loginRouter = require("./controllers/authentication");
 const adminRouter = require("./controllers/admin");
 const webhookRouter = require("./controllers/webhook");
+const subscriptionRouter = require("./controllers/subscription");
 
 const app = express();
 
@@ -38,6 +39,7 @@ app.use("/api/admin", adminRouter);
 app.use("/api/users", userRouter);
 app.use("/api/auth", loginRouter);
 app.use("/api/webhook", webhookRouter)
+app.use("/api/subscriptions", subscriptionRouter)
 app.use(unknownEndpoint);
 app.use(errorHandler);
 
