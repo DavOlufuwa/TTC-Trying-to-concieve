@@ -66,21 +66,19 @@ const adminExtractor = async (request, response, next) => {
     request.token,
     process.env.SECRET_TOKEN_KEY
   );
-  
+
   if (!verifiedAccessToken.id) {
     return response
       .status(401)
       .json({ error: "accessToken missing or invalid" });
   } else if (verifiedAccessToken.role === 2170) {
     request.user = await SuperAdmin.findById(verifiedAccessToken.id);
-    next()
-  }else if (verifiedAccessToken.role === 5150) {
+    next();
+  } else if (verifiedAccessToken.role === 5150) {
     request.user = await Admin.findById(verifiedAccessToken.id);
-    next()
+    next();
   }
-  
 };
-
 const superAdminExtractor = async (request, response, next) => {
   const verifiedAccessToken = jwt.verify(
     request.token,
@@ -92,7 +90,6 @@ const superAdminExtractor = async (request, response, next) => {
       .status(401)
       .json({ error: "accessToken missing or invalid" });
   } else {
-
     request.user = await SuperAdmin.findById(verifiedAccessToken.id);
   }
   next();
@@ -131,11 +128,21 @@ const refreshTokenExtractor = async (request, response, next) => {
   if (!verifiedRefreshToken.id) {
     return response
       .status(403)
-      .json({ error: "refreshToken missing or invalid" });
+      .json({ error: "refreshToken missing or invalid" });   
+  } else if (verifiedRefreshToken.role === 2170) {
+    request.user = await SuperAdmin.findById(verifiedRefreshToken.id);
+    next();
+  } else if (verifiedRefreshToken.role === 5150) {
+    request.user = await Admin.findById(verifiedRefreshToken.id);
+    next();
+  } else if (verifiedRefreshToken.role === 5015) {
+    request.user = await Doctor.findById(verifiedRefreshToken.id);
+    next();
   } else {
     request.user = await User.findById(verifiedRefreshToken.id);
+    next();
   }
-  next();
+
 };
 
 // SearchByTitle
@@ -218,8 +225,6 @@ const setPaginationLinks = (request, response, next) => {
 
   next();
 };
-
-
 
 module.exports = {
   requestLogger,
