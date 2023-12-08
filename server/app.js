@@ -15,6 +15,7 @@ const superAdminRouter = require("./controllers/superAdmin");
 const userRouter = require("./controllers/users");
 const loginRouter = require("./controllers/authentication");
 const adminRouter = require("./controllers/admin");
+const webhookRouter = require("./controllers/webhook");
 
 const app = express();
 
@@ -36,6 +37,7 @@ app.use("/api/superadmin", superAdminRouter);
 app.use("/api/admin", adminRouter);
 app.use("/api/users", userRouter);
 app.use("/api/auth", loginRouter);
+app.use("/api/webhook", webhookRouter)
 app.use(unknownEndpoint);
 app.use(errorHandler);
 
