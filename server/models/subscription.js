@@ -1,6 +1,10 @@
 const { Schema, model } = require("mongoose");
 
 const subscriptionSchema = new Schema({
+  subscriberId: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+  },
   planName: {
     type: String,
   },
@@ -13,19 +17,18 @@ const subscriptionSchema = new Schema({
   subscriptionAmount: {
     type: Number,
   },
+  subscriptionStatus: {
+    type: String,
+    enum: ["active", "cancelled", "renewed", "not-renewed", "failed"],
+  },
   customerCode: {
     type: String,
   },
-  subscriber: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
+  customerEmail: {
+    type: String,
   },
   accountName: {
     type: String,
-  },
-  status: {
-    type: String,
-    enum: ["active", "cancelled", "renewed","not-renewed", "failed"],
   },
   createdAt: {
     type: Date,
