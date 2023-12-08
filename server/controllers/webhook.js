@@ -34,7 +34,7 @@ webhookRouter.post("/", async (request, response) => {
 
         await subscription.save();
 
-
+        break;
     }
   }
   response.status(200).send("OK");

@@ -13,4 +13,12 @@ subscriptionRouter.post('/', async (request, response) => {
 })
 
 
+subscriptionRouter.get('/', async (request, response) => {
+  
+  const subscriptions = await Subscription.find({})
+
+  response.status(200).json(subscriptions);
+})
+
+
 module.exports = subscriptionRouter
