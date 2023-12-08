@@ -9,6 +9,7 @@ const {
   unknownEndpoint,
   errorHandler,
   accessTokenExtractor,
+  responseLogger,
 } = require("./utils/middleware");
 const { MONGODB_URI } = require("./utils/config");
 const logger = require("./utils/logger");
@@ -35,6 +36,7 @@ mongoose
 app.use(express.json());
 app.use(cors());
 app.use(requestLogger);
+app.use(responseLogger)
 app.use(cookieParser());
 app.use(accessTokenExtractor);
 app.use("/api/superadmin", superAdminRouter);

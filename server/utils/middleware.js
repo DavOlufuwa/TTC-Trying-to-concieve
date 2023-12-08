@@ -13,6 +13,11 @@ const requestLogger = (request, response, next) => {
   next();
 };
 
+const responseLogger = (request, response, next) => {
+  logger.info("Status code:", response.statusCode);
+  next();
+}
+
 const unknownEndpoint = (request, response) => {
   response.status(404).send({ error: "unknown endpoint" });
 };
@@ -228,6 +233,7 @@ const setPaginationLinks = (request, response, next) => {
 
 module.exports = {
   requestLogger,
+  responseLogger,
   unknownEndpoint,
   errorHandler,
   accessTokenExtractor,
