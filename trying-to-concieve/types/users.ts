@@ -21,3 +21,17 @@ export type loginData = {
   email: string;
   password: string;
 }
+
+
+export interface AuthData {
+  id: String;
+  email: String;
+  fullName: String;
+  role: Number;
+  accessToken: String;
+}
+
+export interface Contextvaluetype {
+  auth: AuthData;
+  setAuth: React.Dispatch<React.SetStateAction<AuthData>>;
+}

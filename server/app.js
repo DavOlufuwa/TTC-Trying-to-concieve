@@ -20,6 +20,7 @@ const adminRouter = require("./controllers/admin");
 const webhookRouter = require("./controllers/webhook");
 const subscriptionRouter = require("./controllers/subscription");
 const logoutRouter = require("./controllers/logout");
+const refreshRouter = require("./controllers/refresh");
 
 const app = express();
 
@@ -45,6 +46,7 @@ app.use("/api/users", userRouter);
 app.use("/api/auth", loginRouter);
 app.use("/api/webhook", webhookRouter)
 app.use("/api/subscriptions", subscriptionRouter)
+app.use("/api/refresh", refreshRouter)
 app.use("/api/logout", logoutRouter)
 app.use(unknownEndpoint);
 app.use(errorHandler);

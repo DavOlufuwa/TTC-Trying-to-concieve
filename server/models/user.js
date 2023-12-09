@@ -48,7 +48,7 @@ const userSchema = new Schema({
     minlength: 2,
   },
   partnerAge: {
-    type: String,
+    type: Number,
     minlength: 2,
   },
   partnerGender: {
