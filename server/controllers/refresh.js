@@ -17,7 +17,6 @@ refreshRouter.get("/", refreshTokenExtractor,  async (request, response) => {
     fullName: `${user.firstName} ${user.lastName}`,
     accessToken: accessToken,
   });
-
 })
 
 module.exports = refreshRouter

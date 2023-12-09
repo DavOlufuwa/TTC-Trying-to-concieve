@@ -1,22 +1,23 @@
 "use server";
-import axios from "axios";
+import axios from "@/lib/axios";
 import { UserForm, loginData } from "@/types/users";
+
 export const signUpNewUser = async (userInfo: UserForm) => {
   try {
     const response = await axios.post(
-      "http://localhost:5050/api/users",
+      "/api/users",
       userInfo
     );
     return response.data;
-  } catch (error) {
-    console.log(error);
+  } catch (error : any) {
+    return error.response.data.error
   }
 };
 
 export const signInNewUser = async (userInfo: loginData) => {
   try {
     const response = await axios.post(
-      "http://localhost:5050/api/auth/users",
+      "/api/auth/users",
       userInfo
     );
     return response.data;
