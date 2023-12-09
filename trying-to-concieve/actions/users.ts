@@ -25,3 +25,4 @@ export const signInNewUser = async (userInfo: loginData) => {
     return error.response.data.error
   }
 };
+
