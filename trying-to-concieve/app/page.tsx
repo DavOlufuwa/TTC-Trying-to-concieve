@@ -1,8 +1,12 @@
 // import { getAllPosts, getPostBySlug } from "@/sanity/sanityUtils";
+import Navigation from "@/components/Navigation";
 
 const page = async () => {
 
-  return <div>Parletti Dan Fodio</div>;
+  return <div>
+    <Navigation />
+    Risky Burger
+  </div>;
 
 };
 
