@@ -16,3 +16,8 @@ export interface UserForm {
   medicalHistory: string;
   password: string;
 }
+
+export type loginData = {
+  email: string;
+  password: string;
+}

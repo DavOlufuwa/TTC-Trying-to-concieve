@@ -1,6 +1,6 @@
 export interface Role {
-  Admin: string;
-  SuperAdmin: string;
-  User: string;
-  Doctor: string;
+  Admin: Number;
+  SuperAdmin: Number;
+  User: Number;
+  Doctor: Number;
 }
