@@ -14,7 +14,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     accessToken: "",
   };
 
-  const storedAuth = typeof window !== undefined && JSON.parse(localStorage.getItem("authData") as string);
+  const storedAuth = typeof window !== undefined && JSON.parse(localStorage.getItem("authData") as string) ;
   const [auth, setAuth] = useState<AuthData>(storedAuth || initialAuthData);
 
   useEffect(() => {

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ReactNode } from "react";
-import Protection from "./components/Protection";
+import Protection from "@/components/Protection";
 
 
 export const metadata: Metadata = {
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 const Layout = ({ children }: { children: ReactNode }) => {
-  return <Protection children={children}/>
+  return <Protection link="/users" children={children}/>
 };
 
 export default Layout;

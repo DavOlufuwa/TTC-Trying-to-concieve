@@ -6,21 +6,15 @@ interface Formdata {
   password: string;
 }
 
-export const signUpSuperAdmin = async (formData: Formdata) => {
-  try {
-    const response = await axios.post("/api/admin", formData);
-    console.log(response.data);
-  } catch (error : any) {
-    console.log(error.response.data.error);
-  }
+export const signUpAdmin = async (formData: Formdata) => {
+  const response = await axios.post("/api/admin", formData);
+  return response
 };
 
-
-export const signInSuperAdmin = async (formData: Formdata) => {
+export const signInAdmin = async (formData: Formdata) => {
   const response = await axios.post("/api/auth/admin", formData);
   return response
 }
-
 
 export const getAllUsers = async () => {
   const response = await axiosAuth.get("/api/users");
