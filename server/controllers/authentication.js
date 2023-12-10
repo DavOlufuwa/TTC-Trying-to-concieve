@@ -30,7 +30,10 @@ loginRouter.post("/users", async (request, response) => {
 
   const accessToken = jwt.sign(
     userDetailsForToken,
-    process.env.SECRET_TOKEN_KEY
+    process.env.SECRET_TOKEN_KEY,
+    {
+      expiresIn: 60 * 60,
+    }
   );
 
   const refreshToken = jwt.sign(
@@ -83,7 +86,10 @@ loginRouter.post("/admin", async (request, response) => {
 
   const accessToken = jwt.sign(
     adminDetailsForToken,
-    process.env.SECRET_TOKEN_KEY
+    process.env.SECRET_TOKEN_KEY,
+    {
+      expiresIn: 60 * 60
+    }
   );
 
   const refreshToken = jwt.sign(
@@ -136,7 +142,10 @@ loginRouter.post("/doctors", async (request, response) => {
 
   const accessToken = jwt.sign(
     doctorDetailsForToken,
-    process.env.SECRET_TOKEN_KEY
+    process.env.SECRET_TOKEN_KEY,
+    {
+      expiresIn: 60 * 60
+    }
   );
 
   const refreshToken = jwt.sign(
@@ -192,7 +201,10 @@ loginRouter.post("/superadmin", async (request, response) => {
 
   const accessToken = jwt.sign(
     superAdminDetailsForToken,
-    process.env.SECRET_TOKEN_KEY
+    process.env.SECRET_TOKEN_KEY,
+    {
+      expiresIn: 60 * 60
+    }
   );
 
   const refreshToken = jwt.sign(
