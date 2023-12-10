@@ -1,5 +1,3 @@
-"use server"
-
 import axios from "@/lib/axios"
 
 const config = {

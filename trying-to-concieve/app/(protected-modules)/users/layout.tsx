@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ReactNode } from "react";
-import { AuthProvider } from "../context/AuthProvider";
+import Protection from "./components/Protection";
+
 
 export const metadata: Metadata = {
   title: "TTC-user",
@@ -8,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 const Layout = ({ children }: { children: ReactNode }) => {
-  return <AuthProvider>{children}</AuthProvider>;
+  return <Protection children={children}/>
 };
 
 export default Layout;

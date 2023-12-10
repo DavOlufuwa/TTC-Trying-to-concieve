@@ -1,5 +1,3 @@
-"use server";
-
 import axios from "@/lib/axios";
 import { axiosAuth } from "@/lib/axios";
 interface Formdata {
@@ -19,20 +17,12 @@ export const signUpSuperAdmin = async (formData: Formdata) => {
 
 
 export const signInSuperAdmin = async (formData: Formdata) => {
-  try {
-    const response = await axios.post("/api/auth/admin", formData);
-    console.log(response.data);
-  } catch (error : any) {
-    console.log(error.response.data.error);
-  }
+  const response = await axios.post("/api/auth/admin", formData);
+  return response
 }
 
 
 export const getAllUsers = async () => {
-  try {
-    const response = await axiosAuth.get("/api/users");
-    console.log(response.data);
-  } catch (error : any) {
-    console.log(error.response.data.error);
-  }
+  const response = await axiosAuth.get("/api/users");
+  return response
 }
