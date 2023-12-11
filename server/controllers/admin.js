@@ -12,7 +12,7 @@ adminRouter.post("/", async (request, response) => {
   const existingAdmin = await Admin.findOne({ email });
 
   if (existingAdmin) {
-    return response.status(409).json({ error: "Admin already exists" });
+    return response.status(409).json({ error: "Admin with this email already exists" });
   }
 
   const hashedPassword = await bcryptjs.hash(password, 10);

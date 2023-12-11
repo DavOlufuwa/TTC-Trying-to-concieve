@@ -9,7 +9,15 @@ const {
 
 // Sign up User
 userRouter.post("/", async (request, response) => {
+
   const body = request.body;
+  
+  const existingUser = await User.findOne({ email: body.email });
+
+  if (existingUser) {
+    return response.status(409).json({ error: "User with this email already exists" });
+  }
+  
   const newUser = {};
   const fields = [
     "fullName",

@@ -1,5 +1,6 @@
 import axios from "@/lib/axios";
 import { axiosAuth } from "@/lib/axios";
+import { loginData } from "@/types/users";
 interface Formdata {
   fullName: string;
   email: string;
@@ -11,7 +12,7 @@ export const signUpAdmin = async (formData: Formdata) => {
   return response
 };
 
-export const signInAdmin = async (formData: Formdata) => {
+export const signInAdmin = async (formData: loginData) => {
   const response = await axios.post("/api/auth/admin", formData);
   return response
 }
