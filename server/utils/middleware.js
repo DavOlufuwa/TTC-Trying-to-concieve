@@ -4,6 +4,7 @@ const SuperAdmin = require("../models/superAdmin");
 const Doctor = require("../models/doctor");
 const Admin = require("../models/admin");
 const logger = require("./logger");
+const KJUR = require("jsrsasign");
 
 const requestLogger = (request, response, next) => {
   logger.info("Method:", request.method);
@@ -231,6 +232,52 @@ const setPaginationLinks = (request, response, next) => {
   next();
 };
 
+
+const generateZoomToken = (request, response, next) => {
+  let signature = "";
+  const iat = Math.round(new Date().getTime() / 1000);
+  const exp = iat + 60 * 60 * 2;
+
+  const oHeader = {
+    alg: "HS256",
+    typ: "JWT",
+  }
+  
+  const sdkKey = process.env.ZOOM_SDK_KEY;
+  const sdkSecret = process.env.ZOOM_SDK_SECRET;
+
+  const {
+    topic, 
+    password,
+    userIdentity,
+    sessionKey, 
+    roleType
+  } = request.body
+
+  const oPayload = {
+    app_key : sdkKey,
+    iat,
+    exp,
+    tpc: topic,
+    pwd: password,
+    user_identity: userIdentity,
+    session_key: sessionKey,
+    role_type: roleType
+  }
+
+  const sHeader = JSON.stringify(oHeader);
+  const sPayload = JSON.stringify(oPayload);
+  signature = KJUR.jws.JWS.sign(null, sHeader, sPayload, sdkSecret);
+
+  response.signature = signature;
+
+  next();
+}
+
+
+
+
+
 module.exports = {
   requestLogger,
   responseLogger,
@@ -247,4 +294,5 @@ module.exports = {
   searchByTags,
   generateResults,
   setPaginationLinks,
+  generateZoomToken
 };

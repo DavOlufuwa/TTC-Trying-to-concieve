@@ -42,6 +42,7 @@ const page = () => {
         email: "",
         password: "",
       });
+      
       router.replace("/admin/1232");
 
     } catch (error: any) {  

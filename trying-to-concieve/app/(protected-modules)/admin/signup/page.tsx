@@ -44,8 +44,7 @@ const page = () => {
         email: "",
         password: "",
       })
-
-
+      
     }catch(error: any) {
       console.log(error.response.data.error)
     }
