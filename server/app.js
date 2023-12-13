@@ -21,7 +21,7 @@ const webhookRouter = require("./controllers/webhook");
 const subscriptionRouter = require("./controllers/subscription");
 const logoutRouter = require("./controllers/logout");
 const refreshRouter = require("./controllers/refresh");
-const videoRouter = require("./controllers/videosession");
+const videoRouter = require("./controllers/virtual");
 
 const app = express();
 
